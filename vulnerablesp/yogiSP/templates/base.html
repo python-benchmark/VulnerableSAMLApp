@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Yogi's Vulnerable SAML App</title>
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<script src="/static/js/bootstrap.min.js"></script>
+		
+  </head>
+  <body>
+    <div class="container">
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		<ul class="nav navbar-nav">
+		<p class="navbar-text"><a href="/">Yogi's Saml App</a></p>
+			<li><a href="/complaints">Complaints</a></li>
+			{% if attributes %}
+				{% for attr in attributes %}
+					{% if attr.0 == 'memberOf' %}
+						{% for val in attr.1 %}
+							{% if val == 'PlatformConfiguration' %}
+								<li><a href="/settings">Saml Settings</a></li>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			{% endif %} 
+		  <li><a href="/learn">Learn More</a></li>
+		{% if paint_logout %}
+  			{% if attributes %}
+				{% for attr in attributes %}
+					{% if attr.0 == 'firstName' %}
+						{% for val in attr.1 %}
+						<p class="navbar-text navbar-right">Singed in as: <a href=/profile>{{ val }}</a></p>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		{% endif %}
+		{% if paint_logout %}
+			<li><a href="/?slo">Logout</a></li>
+		{% else %}
+			<li><a href="/?sso2">Login</a></li>
+		{% endif %}
+		</ul>
+	</div>
+</nav>
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
+

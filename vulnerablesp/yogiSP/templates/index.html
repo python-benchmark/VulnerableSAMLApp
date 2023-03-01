@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if errors %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Errors:</strong>
+    <ul class="list-unstyled">
+        {% for err in errors %}
+          <li>{{err}}</li>
+        {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% if not_auth_warn %}
+  <div class="alert alert-danger" role="alert">Not authenticated</div>
+{% endif %}
+{% if success_slo %}
+  <div class="alert alert-success" role="alert">Successfully logged out</div>
+{% endif %}
+
+<center>
+	<h3>Has this bear stolen your lunch, picnic basket, or other consumable goods?</h3>
+	<img src="/static/images/yogi-stealing.png" style="width:40%;height:40%;">
+</center>
+
+<p>If he has please file a complaint. The staff at Jellystone utlize these metrics to track unwanted behavior. Unfortunatly, if it continues we will be forced to relocate Yogi to a new home.</p>
+<p>It is vital that these metrics are accurate. PLEASE report any misbehavings that you witness or are a victim of. You can report an issue on the complaints tab above.</p>
+
+
+
+
+
+
+
+{% endblock %}
+
